@@ -3,18 +3,34 @@ import ReactDOM from 'react-dom';
 import { Divider } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import * as Api from '../../api';
-
 import DeleteModal from './ViewPublications/DeleteModal'
+import GenerateFSR from './ViewPublications/GenerateFSR'
+import SendtoAdmin from './ViewPublications/SendtoAdmin'
+import ViewPublicationsRow from './ViewPublicationsRow'
+import NavBar from './../ui/NavBar'
+
+const dummySample = {researchType : 'Research', 
+                      researchSubtype : 'Research Proposal',
+                      completeTitle: 'Sample',
+                      Role: 'ABC',
+                      Coworkers: 'ABC',
+                      Funding: 'N/A',
+                      StartDate: '03/03/03',
+                      EndDate: '04/04/04',
+                      ApprovedCreditUnits: '3',
+                      TotalWorkLoadUnits: '3'};
 
 export default class ViewPublications extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      publications: []
+      data: [dummySample]
     };
 
     this.handleLogout = this.handleLogout.bind(this);
+    this.startAdd = this.startAdd.bind(this);
+    this.generate = this.generate.bind(this);
   }
 
 
@@ -33,121 +49,68 @@ export default class ViewPublications extends Component {
     this.props.history.push('../..');
   }
 
+ startAdd() {
+    this.props.history.push('./add');
+  }
+
+  generate() {
+  }
+
   render() {
     return (
       <div className="App-header">
-        <div class="ui blue inverted fluid ten item menu">
-          <a class="item" href="/profile/view">
-            Profile
-          </a>
-          <a class="item" href="/teachingload/view">
-            Teaching Load
-          </a>
-          <a class="item active" href="/publications/view">
-            Publications
-          </a>
-          <a class="item" href="/adminwork/view">
-            Administrative Work
-          </a>
-          <a class="item" href="/ecservice/view">
-            Extension and Community Service
-          </a>
-          <a class="item" href="/studyload/view">
-            Study Load
-          </a>
-          <a class="item" href="/lpp/view">
-            Limited Practice of Profession
-          </a>
-          <a class="item" href="/Professorialchair/view">
-            Professorial Chair
-          </a>
-          <a class="item" href="/consultation/view">
-            Consultation Hours
-          </a>
-          <a class="item" onClick={this.handleLogout}>
-            Logout
-          </a>
-        </div>
-        <Divider hidden="true" />
+        <NavBar {...this.props}/>
         <div
           class="ui compact piled very padded text left aligned container segment"
           color="teal">
           <div>
             <h2 class="ui blue header">
               View Publications
-              <button class="ui right floated blue button">Generate FSR</button>
-              <button class="ui right floated blue button">
-                Send to Admin
-              </button>
+              <GenerateFSR/>
+              <SendtoAdmin/>
             </h2>
           </div>
           <Divider hidden="true" />
+          <Divider hidden="true" />
+          <Divider hidden="true" />
           <div>
-            <table class="ui celled structured table">
+
+          <style> {`.ui.celled.table {max-width: 85vw;border-width: 0.5vh;border-color: rgb(0,10,200); padding: 10px 10px 10px 10px;}`} </style>
+          <table class = "ui celled table">
               <thead>
                 <tr>
-                  <th>Title</th>
-                  <th>Type</th>
-                  <th>Role</th>
-                  <th>Co-workers</th>
-                  <th>Funding</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Approved Credit Units</th>
-                  <th>Total Workload Units</th>
-                  <th>Edit</th>
-                  <th>Attachments</th>
-                  <th>Delete</th>
+                  <th class = "center aligned">Title</th>
+                  <th class = "center aligned">Type</th>
+                  <th class = "center aligned">Role</th>
+                  <th class = "center aligned">Co-workers</th>
+                  <th class = "center aligned">Funding</th>
+                  <th class = "center aligned">Start Date</th>
+                  <th class = "center aligned">End Date</th>
+                  <th class = "center aligned">Approved Credit Units</th>
+                  <th class = "center aligned">Total Workload Units</th>
+                  <th class = "center aligned">Edit/Delete</th>
                 </tr>
               </thead>
-              <tr class="center aligned">
-                <td>Sample</td>
-                <td>Type</td>
-                <td>Role</td>
-                <td>ABC</td>
-                <td>123,456</td>
-                <td>03/17/18</td>
-                <td>03/17/19</td>
-                <td>3</td>
-                <td>3</td>
-                <td>
-                  <button class="ui button">
-                    <i class="pencil alternate icon" />
-                  </button>
-                </td>
-                <td>
-                  <button class="ui button">
-                    <i class="eye icon" />
-                  </button>
-                </td>
-                <td>
-                  <div>
-                    <DeleteModal />
-                  </div>
-                </td>
-              </tr>
-              {this.state.publications.map(item => {
-                return (
-                  <tr class="center aligned">
-                    <td>{item.title}</td>
-                    <td>{item.type}</td>
-                    <td>{item.role}</td>
-                    <td>{item.Coauthors}</td>
-                    <td>{item.funding}</td>
-                    <td>{item.startdate}</td>
-                    <td>{item.enddate}</td>
-                    <td>{item.credit}</td>
-                    <td>{item.total}</td>
-                    <button class="ui right floated blue button">Edit</button>
-                    <button class="ui right floated blue button">
-                      View Attachments
-                    </button>
-                  </tr>
-                );
-              })}
-            </table>
-            <button class="ui right floated blue button">
-              Add Publications
+            <tbody>
+              {this.state.data.map((item) =>{
+                return(
+                    <ViewPublicationsRow {...this.props}
+                          completeTitle= {item.completeTitle}
+                          researchSubtype ={item.researchSubtype}
+                          Role= {item.Role}
+                          Coworkers={item.Coworkers}
+                          Funding={item.Funding}
+                          StartDate={item.StartDate}
+                          EndDate= {item.EndDate}
+                          ApprovedCreditUnits= {item.ApprovedCreditUnits}
+                          TotalWorkLoadUnits= {item.TotalWorkLoadUnits}/>
+                  )
+                })
+              }
+            </tbody>
+          </table>
+            <button class="ui right floated blue button" onClick={this.startAdd}>
+              Add new Publications
             </button>
           </div>
         </div>

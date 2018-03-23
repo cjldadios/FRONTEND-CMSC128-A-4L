@@ -8,11 +8,15 @@ import Signup from './../features/auth/Signup';
 import AddTeachingLoad from './../features/teachingload/AddTeachingLoad';
 import EditTeachingLoad from './../features/teachingload/EditTeachingLoad';
 import AddStudyLoad from './../features/studyload/AddStudyLoad';
+import AddPublication from './../features/publications/AddPublication';
 import EditStudyLoad from './../features/studyload/EditStudyLoad';
 import ViewPublications from './../features/publications/ViewPublications';
 import ViewTeachingLoad from './../features/teachingload/ViewTeachingLoad';
-import ViewAdminWork from './../features/adminwork/ViewAdminWork';
 import ViewStudyLoad from './../features/studyload/ViewStudyLoad';
+import EditPublications from './../features/publications/EditPublications';
+import AddAdministrativeWork from './../features/adminWork/AddAdministrativeWork'
+import ViewAdministrativeWork from './../features/adminWork/ViewAdministrativeWork';
+import AddConsultationHours from './../features/consultationHours/AddConsultationHours'
 
 class App extends Component {
   render() {
@@ -27,9 +31,14 @@ class App extends Component {
             <Route exact={true} path="/studyload/add" component={AddStudyLoad}/>
             <Route exact={true} path="/studyload/edit" component={EditStudyLoad}/>
             <Route exact={true} path="/publications/view" component={ViewPublications}/>
+             <Route exact={true} path="/publications/add" component={AddPublication}/>
             <Route exact={true} path="/teachingload/view" component={ViewTeachingLoad}/>
             <Route exact={true} path="/studyload/view" component={ViewStudyLoad}/>
-            <Route exact={true} path="/adminwork/view" component={ViewAdminWork}/>
+            <Route exact={true} path="/publications/edit" component={EditPublications}/>
+            <Route exact={true} path="/adminwork/view" component={ViewAdministrativeWork}/>
+            <Route exact={true} path="/adminwork/add" component={AddAdministrativeWork}/>
+            <Route exact={true} path="/consultation/add" component={AddConsultationHours}/>
+
           </div>
         </Router>
       </div>

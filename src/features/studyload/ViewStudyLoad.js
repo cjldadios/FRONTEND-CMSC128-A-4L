@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom';
 import { Divider } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import * as Api from '../../api';
-import ViewTeachingLoadRow from './ViewStudyLoadRow'
+import ViewStudyLoadRow from './ViewStudyLoadRow'
+import DeleteModal from './ViewStudyload/DeleteModal';
+import GenerateFSR from './ViewStudyload/GenerateFSR'
+import SendtoAdmin from './ViewStudyload/SendtoAdmin'
+import NavBar from './../ui/NavBar'
 
 //Dummy data
 const dummySample = {degree : 'MSCS', uni : 'UPLB', studyleave : 'No',
@@ -27,47 +31,18 @@ export default class ViewStudyLoad extends Component {
 
     return (
       <div className="App-header">
-        <div class="ui blue inverted fluid ten item menu">
-          <a class="item" href="/profile/view">
-            Profile
-          </a>
-          <a class="item" href="/teachingload/view">
-            Teaching Load
-          </a>
-          <a class="item" href="/publications/view">
-            Publications
-          </a>
-          <a class="item" href="/adminwork/view">
-            Administrative Work
-          </a>
-          <a class="item" href="/ecservice/view">
-            Extension and Community Service
-          </a>
-          <a class="item active" href="/studyload/view">
-            Study Load
-          </a>
-          <a class="item" href="/lpp/view">
-            Limited Practice of Profession
-          </a>
-          <a class="item" href="/Professorialchair/view">
-            Professorial Chair
-          </a>
-          <a class="item" href="/consultation/view">
-            Consultation Hours
-          </a>
-          <a class="item" href="../..">
-            Logout
-          </a>
-        </div>
+        <NavBar {...this.props}/>
 
         <div class = "ui piled very padded container segment" color = "teal">
           <div>
             <h1 class = "ui blue header">
               STUDY LOAD
-              <button class="ui right floated blue button">Generate FSR</button>
-              <button class="ui right floated blue button"> Send to Admin </button>
+              <GenerateFSR/>
+              <SendtoAdmin/>
             </h1>
           </div>
+          <Divider hidden="true" />
+          <Divider hidden="true" />
           <Divider hidden="true" />
 
           <style> {`.ui.celled.table {max-width: 85vw;border-width: 0.5vh;border-color: rgb(0,10,200); padding: 10px 10px 10px 10px;}`} </style>
@@ -90,7 +65,7 @@ export default class ViewStudyLoad extends Component {
             <tbody>
               {this.state.data.map((item) =>{
                 return(
-                    <ViewTeachingLoadRow degree = {item.degree} uni = {item.uni} studyleave = {item.studyleave} fellowship = {item.fellowship} courseno = {item.courseno} ccred = {item.ccred} day = {item.day} time = {item.time} school = {item.school} slcred = {item.slcred} />
+                    <ViewStudyLoadRow {...this.props} degree = {item.degree} uni = {item.uni} studyleave = {item.studyleave} fellowship = {item.fellowship} courseno = {item.courseno} ccred = {item.ccred} day = {item.day} time = {item.time} school = {item.school} slcred = {item.slcred} />
                   )
                 })
               }

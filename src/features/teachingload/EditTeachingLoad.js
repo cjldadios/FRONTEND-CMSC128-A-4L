@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import { Divider } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import * as Api from '../../api';
+import NavBar from './../ui/NavBar';
+import GenerateFSR from './ViewTeachingload/GenerateFSR';
+import SendtoAdmin from './ViewTeachingload/SendtoAdmin';
 
 export default class EditTeachingLoad extends Component {
   constructor(props) {
@@ -105,51 +108,19 @@ export default class EditTeachingLoad extends Component {
   render() {
     return (
       <div className="App-header">
-        <div class="ui blue inverted fluid ten item menu">
-          <a class="item active" href="/profile/view">
-            Profile
-          </a>
-          <a class="item" href="/teachingload/view">
-            Teaching Load
-          </a>
-          <a class="item" href="/publications/view">
-            Publications
-          </a>
-          <a class="item" href="/adminwork/view">
-            Administrative Work
-          </a>
-          <a class="item" href="/ecservice/view">
-            Extension and Community Service
-          </a>
-          <a class="item" href="/studyload/view">
-            Study Load
-          </a>
-          <a class="item" href="/lpp/view">
-            Limited Practice of Profession
-          </a>
-          <a class="item" href="/Professorialchair/view">
-            Professorial Chair
-          </a>
-          <a class="item" href="/consultation/view">
-            Consultation Hours
-          </a>
-          <a class="item" onClick={this.handleLogout}>
-            Logout
-          </a>
-        </div>
-        <Divider hidden="true" />
+        <NavBar {...this.props}/>
         <div
           class="ui piled very padded text left aligned container segment"
           color="teal">
           <div>
             <h2 class="ui blue header">
               Edit Teaching Load
-              <button class="ui right floated blue button">Generate FSR</button>
-              <button class="ui right floated blue button">
-                Send to Admin
-              </button>
+              <GenerateFSR/>
+              <SendtoAdmin/>
             </h2>
           </div>
+          <Divider hidden="true" />
+          <Divider hidden="true" />
           <Divider hidden="true" />
           <p>
             <a class="ui small header"> Subject </a>
@@ -265,7 +236,7 @@ export default class EditTeachingLoad extends Component {
             <button
               class="ui center aligned blue button"
               onClick={this.startEdit}>
-              Save Teaching Load
+              Save changes
             </button>
           </div>
         </div>

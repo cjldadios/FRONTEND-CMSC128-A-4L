@@ -4,6 +4,10 @@ import { Divider } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import * as Api from '../../api';
 import ViewTeachingLoadRow from './TeachingLoadViewRow';
+import GenerateFSR from './ViewTeachingload/GenerateFSR';
+import SendtoAdmin from './ViewTeachingload/SendtoAdmin';
+import DeleteModal from './ViewTeachingload/DeleteModal';
+import NavBar from './../ui/NavBar'
 
 //Dummy data
 const dummySample = {
@@ -65,50 +69,18 @@ export default class ViewTeachingLoad extends Component {
   render() {
     return (
       <div className="App-header">
-        <div class="ui blue inverted fluid ten item menu">
-          <a class="item" href="/profile/view">
-            Profile
-          </a>
-          <a class="item active" href="/teachingload/view">
-            Teaching Load
-          </a>
-          <a class="item" href="/publications/view">
-            Publications
-          </a>
-          <a class="item" href="/adminwork/view">
-            Administrative Work
-          </a>
-          <a class="item" href="/ecservice/view">
-            Extension and Community Service
-          </a>
-          <a class="item" href="/studyload/view">
-            Study Load
-          </a>
-          <a class="item" href="/lpp/view">
-            Limited Practice of Profession
-          </a>
-          <a class="item" href="/Professorialchair/view">
-            Professorial Chair
-          </a>
-          <a class="item" href="/consultation/view">
-            Consultation Hours
-          </a>
-          <a class="item" href="../..">
-            Logout
-          </a>
-        </div>
+        <NavBar {...this.props}/>
 
         <div class="ui piled very padded container segment" color="teal">
           <div>
             <h1 class="ui blue header">
               TEACHING LOAD
-              <button class="ui right floated blue button">Generate FSR</button>
-              <button class="ui right floated blue button">
-                {' '}
-                Send to Admin{' '}
-              </button>
+              <GenerateFSR/>
+              <SendtoAdmin/>
             </h1>
           </div>
+          <Divider hidden="true" />
+          <Divider hidden="true" />
           <Divider hidden="true" />
 
           <style>
@@ -136,7 +108,7 @@ export default class ViewTeachingLoad extends Component {
             <tbody>
               {this.state.data.map(item => {
                 return (
-                  <ViewTeachingLoadRow
+                  <ViewTeachingLoadRow {...this.props}
                     subj={item.subj}
                     seccode={item.seccode}
                     room={item.room}
