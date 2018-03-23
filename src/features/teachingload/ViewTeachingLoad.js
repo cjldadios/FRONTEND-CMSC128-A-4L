@@ -42,7 +42,7 @@ const dummySample3 = {
   creditw: ' 3'
 };
 
-export default class AddTeachingLoad extends Component {
+export default class ViewTeachingLoad extends Component {
   constructor(props) {
     super(props);
 
@@ -169,4 +169,4 @@ export default class AddTeachingLoad extends Component {
   }
 }
 //=========================
-ReactDOM.render(<AddTeachingLoad />, document.getElementById('root'));
+ReactDOM.render(<ViewTeachingLoad />, document.getElementById('root'));

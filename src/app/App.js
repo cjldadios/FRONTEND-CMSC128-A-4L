@@ -11,6 +11,7 @@ import AddStudyLoad from './../features/studyload/AddStudyLoad';
 import EditStudyLoad from './../features/studyload/EditStudyLoad';
 import ViewPublications from './../features/publications/ViewPublications';
 import ViewTeachingLoad from './../features/teachingload/ViewTeachingLoad';
+import ViewAdminWork from './../features/adminwork/ViewAdminWork';
 import ViewStudyLoad from './../features/studyload/ViewStudyLoad';
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
             <Route exact={true} path="/publications/view" component={ViewPublications}/>
             <Route exact={true} path="/teachingload/view" component={ViewTeachingLoad}/>
             <Route exact={true} path="/studyload/view" component={ViewStudyLoad}/>
+            <Route exact={true} path="/adminwork/view" component={ViewAdminWork}/>
           </div>
         </Router>
       </div>
